@@ -15,7 +15,7 @@ public class DBhandler extends SQLiteOpenHelper {
     //define database
     public static  final String DATABASE_NAME="UserInfo.db";
 
-    public DBhandler(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public DBhandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -32,7 +32,8 @@ public class DBhandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS "+ UsersMaster.Users.TABLE_NAME);
+        onCreate(db);
     }
 
     public void addInfo(String userName,String password){
